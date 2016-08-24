@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
+    tools:context=".activities.MainActivity">
+
+    <TextView
+        android:id="@+id/tvRecycler"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Recycler view using"
+        android:textSize="25dp"
+        android:textColor="@color/colorText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="90dp"
+        android:layout_marginBottom="20dp"/>
+
+    <Button
+        android:id="@+id/bLinear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Linear Layout"
+        android:layout_below="@+id/tvRecycler"/>
+
+    <Button
+        android:id="@+id/bGrid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Grid Layout"
+        android:layout_below="@+id/bLinear"/>
+
+    <Button
+        android:id="@+id/bStaggered"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Staggered Layout"
+        android:layout_below="@+id/bGrid"/>
+</RelativeLayout>
