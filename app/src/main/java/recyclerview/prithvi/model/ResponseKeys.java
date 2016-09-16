@@ -9,5 +9,5 @@ public class ResponseKeys {
     public static final String IMAGE_WIDTH = "width";
     public static final String IMAGE_HEIGHT = "height";
     public static final String IMAGE_URLS = "urls";
-    public static final String IMAGE_URLS_REGULAR = "regular";
+    public static final String IMAGE_URLS_SMALL = "small";
 }

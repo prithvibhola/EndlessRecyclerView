@@ -28,7 +28,7 @@ import static recyclerview.prithvi.model.Endpoints.PHOTOS_URL;
 import static recyclerview.prithvi.model.ResponseKeys.IMAGE_HEIGHT;
 import static recyclerview.prithvi.model.ResponseKeys.IMAGE_ID;
 import static recyclerview.prithvi.model.ResponseKeys.IMAGE_URLS;
-import static recyclerview.prithvi.model.ResponseKeys.IMAGE_URLS_REGULAR;
+import static recyclerview.prithvi.model.ResponseKeys.IMAGE_URLS_SMALL;
 import static recyclerview.prithvi.model.ResponseKeys.IMAGE_WIDTH;
 
 public class GridActivity extends AppCompatActivity {
@@ -38,7 +38,7 @@ public class GridActivity extends AppCompatActivity {
     private VolleySingleton volleySingleton;
     private RequestQueue requestQueue = null;
     private ArrayList<UnsplashData> unsplashList = new ArrayList();
-    private GridAdapter moviesAdapter;
+    private GridAdapter mAdapter;
     private GridLayoutManager mGridLayoutManager;
 
     private int visibleItemCount, totalItemCount, firstVisibleItem;
@@ -61,7 +61,7 @@ public class GridActivity extends AppCompatActivity {
         }
 
         mRecyclerView = (RecyclerView) findViewById(R.id.rvUnsplash);
-        moviesAdapter = new GridAdapter(unsplashList, getApplicationContext());
+        mAdapter = new GridAdapter(unsplashList, getApplicationContext());
 
         sendJSONRequest(PHOTOS_URL);
         setUpRecyclerView(mRecyclerView);
@@ -73,7 +73,7 @@ public class GridActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONArray response) {
                         unsplashList = parseJSONResponse(response);
-                        moviesAdapter.notifyDataSetChanged();
+                        mAdapter.notifyItemInserted(unsplashList.size());
                     }
                 },
                 new Response.ErrorListener() {
@@ -96,7 +96,7 @@ public class GridActivity extends AppCompatActivity {
                 width = image.getString(IMAGE_WIDTH);
                 height = image.getString(IMAGE_HEIGHT);
                 urls = image.getJSONObject(IMAGE_URLS);
-                urlRegular = urls.getString(IMAGE_URLS_REGULAR);
+                urlRegular = urls.getString(IMAGE_URLS_SMALL);
 
                 UnsplashData unsplashData = new UnsplashData();
                 unsplashData.setId(id);
@@ -141,6 +141,6 @@ public class GridActivity extends AppCompatActivity {
                 }
             }
         });
-        rv.setAdapter(moviesAdapter);
+        rv.setAdapter(mAdapter);
     }
 }

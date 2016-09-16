@@ -5,7 +5,7 @@ package recyclerview.prithvi.model;
  */
 public class Endpoints {
 
-    public static final String API_KEY = "PUT YOUR API KEY";
+    public static final String API_KEY = "PUT YOUR API KEY HERE";
     public static final String BASE_URL = "https://api.unsplash.com/";
     public static final String CLIENT_ID = "?client_id=" + API_KEY;
     public static final String PHOTOS = "photos/";

@@ -32,7 +32,7 @@ public class LinearActivity extends AppCompatActivity {
     private VolleySingleton volleySingleton;
     private RequestQueue requestQueue = null;
     private ArrayList<UnsplashData> unsplashList = new ArrayList();
-    private LinearAdapter moviesAdapter;
+    private LinearAdapter mAdapter;
     private LinearLayoutManager mLinearLayoutManager;
 
     private int visibleItemCount, totalItemCount, firstVisibleItem;
@@ -49,7 +49,7 @@ public class LinearActivity extends AppCompatActivity {
         mLinearLayoutManager = new LinearLayoutManager(this);
 
         mRecyclerView = (RecyclerView) findViewById(R.id.rvUnsplash);
-        moviesAdapter = new LinearAdapter(unsplashList, getApplicationContext());
+        mAdapter = new LinearAdapter(unsplashList, getApplicationContext());
 
         sendJSONRequest(PHOTOS_URL);
         setUpRecyclerView(mRecyclerView);
@@ -61,7 +61,7 @@ public class LinearActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONArray response) {
                         unsplashList = parseJSONResponse(response);
-                        moviesAdapter.notifyDataSetChanged();
+                        mAdapter.notifyItemInserted(unsplashList.size());
                     }
                 },
                 new Response.ErrorListener() {
@@ -84,7 +84,7 @@ public class LinearActivity extends AppCompatActivity {
                 width = image.getString(IMAGE_WIDTH);
                 height = image.getString(IMAGE_HEIGHT);
                 urls = image.getJSONObject(IMAGE_URLS);
-                urlRegular = urls.getString(IMAGE_URLS_REGULAR);
+                urlRegular = urls.getString(IMAGE_URLS_SMALL);
 
                 UnsplashData unsplashData = new UnsplashData();
                 unsplashData.setId(id);
@@ -129,6 +129,6 @@ public class LinearActivity extends AppCompatActivity {
                 }
             }
         });
-        rv.setAdapter(moviesAdapter);
+        rv.setAdapter(mAdapter);
     }
 }
